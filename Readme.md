@@ -18,5 +18,5 @@ python app/train.py
 Now, you should be able to communicate with it
 ```bash
 python app/index.py "Hello Dwight"
-Response: Did you do her?
+Response: "Did you do her?"
 ```
