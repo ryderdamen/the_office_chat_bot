@@ -4,7 +4,8 @@
 	Description: This processes the raw text transcript files into JSON and parsed text. It removes white space, names, etc.
 */
 
-$files = array_diff(scandir('raw/'), array('.', '..'));
+$files = array_diff(scandir( __DIR__ . '/raw'), array('.', '..'));
+
 foreach($files as $file) {
     processFile($file);
 }
@@ -13,7 +14,7 @@ die;
 
 function processFile($fileName) {
     // Get the contents, and clean the data
-    $contents = file_get_contents('raw/' . $fileName);
+    $contents = file_get_contents(__DIR__ . '/raw/' . $fileName);
     $contents = preg_replace('/\[.*\]/', '', $contents); // Remove everything in square brackets
     $contents = removeNames($contents); // Remove names
     $contents = str_ireplace('\n\n\n\n', '\n\n', $contents); // Remove extra whitespace
@@ -35,14 +36,14 @@ function removeExtraLinesAndSpaces($contents) {
 }
 
 function writeTxtFile($contents, $fileName) {
-    $myfile = fopen("processed/txt/" . $fileName, "w") or die("Unable to open file!");
+    $myfile = fopen( __DIR__ . "/processed/txt/" . $fileName, "w") or die("Unable to open file!");
     fwrite($myfile, $contents);
     fclose($myfile);
 }
 
 function writeJsonFile($contents, $fileName) {
     $json = json_encode( explode(PHP_EOL, $contents), JSON_PRETTY_PRINT);
-    $myfile = fopen("processed/json/" . str_ireplace('.txt', '.json', $fileName), "w") or die("Unable to open file!");
+    $myfile = fopen(__DIR__ . "/processed/json/" . str_ireplace('.txt', '.json', $fileName), "w") or die("Unable to open file!");
     fwrite($myfile, $json);
     fclose($myfile);
 }
