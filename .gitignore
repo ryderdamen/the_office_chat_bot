@@ -1,2 +1,9 @@
-data/processed/*
-.DS_Store
+# Regular Stuff
+**/.DS_Store
+*.pyc
+/env
+/venv
+
+# Project Specific Stuff
+/data/processed/*
+/app/db.sqlite3

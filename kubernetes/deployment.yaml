@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: the-office-chat-bot
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: the-office-chat-bot
+    spec:
+      containers:
+      - name: the-office-chat-bot
+        image: gcr.io/radical-sloth/the-office-chat-bot
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 60

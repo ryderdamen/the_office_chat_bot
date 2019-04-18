@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: the-office-chat-bot
+  labels:
+    app: the-office-chat-bot
+spec:
+  ports:
+    - port: 80
+      targetPort: 5000
+  selector:
+    app: the-office-chat-bot
